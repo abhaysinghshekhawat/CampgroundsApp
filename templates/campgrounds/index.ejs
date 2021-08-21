@@ -1,0 +1,53 @@
+
+    <% layout('layouts/boilerplate') -%>  
+    
+    
+    <div class="container-fluid" style=" padding: 0;">
+        <div class="sticky-top"  id="cluster-map" ></div> 
+        <div class="container">
+        <form action="/campgrounds/search"  validate method='POST'>
+        
+       
+        <input class="form-control mt-2 needs-validation" list="datalistOptions" id="exampleDataList" name="title" placeholder="Type to search..." required>
+        <datalist id="datalistOptions">
+            <% campgrounds.forEach((camp)=>{ %>
+                <option value="<%= camp.title %> ">
+            <% }) %> 
+            
+        </datalist>
+        <button class="btn btn-info mt-3" style="margin-left: 50%; " >search</button>
+        </form>
+        </div>
+    <h1 class="text-center mb-5 mt-3">All Campgrounds</h1>
+    <div class="container">
+
+        
+
+    <ul>
+    <% for(let campground of campgrounds){ %> 
+           <div class="card mb-5" >
+               <div class="row">
+                   <div class="col-md-3">
+                        <img src= "<%= campground.images[0].path %> "  height="300px" alt="" class="img-fluid">
+                   </div>
+                   <div class="col-md-8 d-flex flex-column justify-content-around">
+                       <h3 class="card-title"><%= campground.title %> </h3>
+                       
+                       <p class="card-text">Lorem ipsum dolor sit amet consectetur adipisicing elit. Reiciendis eius id quo modi voluptatibus suscipit autem quisquam excepturi asperiores consequatur vel voluptas, ipsam inventore aliquid. Dolorum, neque sit! Q</p>
+                        <a href="/campgrounds/<%= campground._id  %> " class="btn btn-primary" style="width: 190px">show <%= campground.title %> </a>
+                    </div>
+               </div>
+           </div>
+    <% } %> 
+    </ul>
+    </div>
+
+    <script>
+        var token = '<%- process.env.MAPBOX_TOKEN %>'
+        var campgrounds = { features: <%- JSON.stringify( campgrounds ) %> } 
+    </script>
+    <script src="/js/clusterMap.js"></script>
+    </div>
+    <a href="/campgrounds/new">Add New</a><br>
+
+    
