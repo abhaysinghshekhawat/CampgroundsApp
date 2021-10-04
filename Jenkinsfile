@@ -8,8 +8,8 @@ pipeline {
 
     // setup parameter for docker image tag
     parameters {
-      booleanParam(name: "DEPLOYED", defaultValue: false)
-      string(name: "IMAGE_TAG", defaultValue: "1.3", description: "This tag is for creating the Docker Image.")
+      booleanParam(name: "DEPLOYED", defaultValue: true)
+      string(name: "IMAGE_TAG", defaultValue: "1.4", description: "This tag is for creating the Docker Image.")
     }
 
     stages {
